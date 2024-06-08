@@ -1,0 +1,11 @@
+.content-container{
+   display: block;
+    width: 90%;
+    margin:  auto;
+   
+    @media (max-width: 600px){
+        width: 100%;
+    }
+
+
+}

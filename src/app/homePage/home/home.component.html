@@ -1,0 +1,37 @@
+<section>
+  <h3 class="main-title main-filter">Filter by keywords</h3>
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="custom-style">
+      <mat-label>Search</mat-label>
+      <input matInput (input)="searchArticles($event)" placeholder="Search">
+    </mat-form-field>
+  </div>
+</section>
+<section>
+  <h3 class="main-title">Results:{{resultCount}}</h3>
+</section>
+<mat-paginator [length]="resultCount" [pageSize]="10" (page)="getServerData($event)">
+</mat-paginator>
+<section class="cards">
+  <mat-card *ngFor="let article of articles">
+    <a routerLink="/article/{{article.id}}" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <img mat-card-image src="{{ article.image_url }}" alt="{{ article.title }}">
+      <mat-card-header>
+        <mat-card-title>
+          <div innerHTML="{{ article.title | highlight : searchPrompt.split(',')}}">
+            <p innerHTML="" class="content_wrapper">{{article.title}}
+            </p>
+          </div>
+        </mat-card-title>
+        <mat-card-subtitle>{{ article.news_site }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div innerHTML="{{ article.title | highlight : searchPrompt.split(',')}}">
+          <p>{{ article.summary | slice:0:100 }}...</p>
+        </div>
+        <mat-card-actions>
+          <button mat-button>Read More</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </a> </mat-card>
+</section>
